@@ -21,6 +21,12 @@ API Endpoints
   - DELETE /posts/{id}/delete: Delete a specific post.
   - GET /posts/{id}: Retrieve a specific post.
 
+  To use these endpoints, you have to do these following steps as they some of them required authorized user:
+    - register an account by running POST /register api 
+    - login by running POST /login api to generate token 
+    - pass this token to these apis in Authorization header with Bearer <token>
+    - now you can run API Endpoints
+
 Getting Started
  - Clone the repository
  - Set up the MySQL database
