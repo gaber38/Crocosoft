@@ -16,19 +16,19 @@ Database Design:
 API Endpoints
   The microservice includes the following RESTful endpoints:
   
-  POST /posts: Create a new post.
-  PUT /posts/{id}/update: Update an existing post.
-  DELETE /posts/{id}/delete: Delete a specific post.
-  GET /posts/{id}: Retrieve a specific post.
+  - POST /posts: Create a new post.
+  - PUT /posts/{id}/update: Update an existing post.
+  - DELETE /posts/{id}/delete: Delete a specific post.
+  - GET /posts/{id}: Retrieve a specific post.
 
 Getting Started
- 1- Clone the repository
- 2- Set up the MySQL database
- 3- Execute the SQL scripts found in the repo to create the necessary tables.
- 4- Create virtual environment > virtualenv venv
- 5- Activate your created virtual env > ven\scripts\activate
- 6- Install the requirements > pip install -r requirements.txt
- 7- Run the Flask application > python app.py
- 8- Access the API at http://localhost:5000.
+ - Clone the repository
+ - Set up the MySQL database
+ - Execute the SQL scripts found in the repo to create the necessary tables.
+ - Create virtual environment > virtualenv venv
+ - Activate your created virtual env > ven\scripts\activate
+ - Install the requirements > pip install -r requirements.txt
+ - Run the Flask application > python app.py
+ - Access the API at http://localhost:5000.
 
 
