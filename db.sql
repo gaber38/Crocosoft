@@ -1,0 +1,79 @@
+CREATE DATABASE task;
+
+use task;
+
+CREATE TABLE users(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    username VARCHAR(256) NOT NULL UNIQUE,
+    email VARCHAR(256) NOT NULL UNIQUE,
+    password VARCHAR(60) NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE posts(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    content TEXT,
+    user_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    content TEXT,
+	  post_id BIGINT,
+  	user_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+  	FOREIGN KEY(post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE likes(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+	  post_id BIGINT,
+  	user_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+  	FOREIGN KEY(post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+  
+  	UNIQUE(post_id, user_id)
+);
+
+CREATE TABLE shares(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+  	post_id BIGINT,
+  	user_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+  	FOREIGN KEY(post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE friendships(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+  	sender_id BIGINT,
+  	receiver_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'accepted', 'blocked') NOT NULL DEFAULT 'pending',
+
+    PRIMARY KEY (id),
+  	FOREIGN KEY(sender_id) REFERENCES users(id) ON DELETE CASCADE,
+  	FOREIGN KEY(receiver_id) REFERENCES users(id) ON DELETE CASCADE,
+  
+  	UNIQUE(sender_id, receiver_id)
+);
+
+
+
